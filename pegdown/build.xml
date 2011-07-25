@@ -1,0 +1,66 @@
+<!--
+  ~ The MIT License
+  ~
+  ~ Copyright (C) 2010-2011 by Anthony Robinson
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<project basedir="." name="plugin-pegdown-if" default="bundle">
+    
+    <property name="src.dir" value="${basedir}/src"/>
+    <property name="lib.dir" value="${basedir}/lib"/>
+    <property name="build.dir" value="${basedir}/target"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir" value="${build.dir}"/>
+    <property name="bundle.dir" value="${basedir}/../src/main/resources/pegdown"/>
+
+    <target name="clean">
+        <delete defaultexcludes="false" includeemptydirs="true">
+            <fileset dir="${build.dir}" includes="**"/>
+        </delete>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" sourcepath="" debug="true" target="1.5" includeAntRuntime="false"
+               compiler="modern" fork="true" source="1.5">
+            <classpath>
+                <fileset dir="${lib.dir}" includes="*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar basedir="${classes.dir}" destfile="${jar.dir}/${ant.project.name}.jar"/>
+    </target>
+
+    <target name="bundle" depends="jar">
+        <mkdir dir="${bundle.dir}"/>
+        <delete defaultexcludes="false">
+            <fileset dir="${bundle.dir}" includes="**"/>
+        </delete>
+        <zip destfile="${bundle.dir}/${ant.project.name}.zip" compress="false" encoding="UTF-8" duplicate="fail">
+            <fileset dir="${lib.dir}" includes="*.jar"/>
+            <fileset dir="${jar.dir}" includes="*.jar"/>
+        </zip>
+    </target>
+
+</project>
