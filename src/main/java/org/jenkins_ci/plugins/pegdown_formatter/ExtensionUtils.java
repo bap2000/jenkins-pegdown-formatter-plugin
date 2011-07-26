@@ -36,6 +36,7 @@ public class ExtensionUtils {
         DEFAULTS = new ArrayList<PegDownExtension>();
         DEFAULTS.add(new PegDownExtension("SUPPRESS_ALL_HTML", 196608, false));
         ADVANCED_DEFAULTS = new ArrayList<PegDownExtension>();
+        ADVANCED_DEFAULTS.add(new PegDownExtension("ABBREVIATIONS", 4, true));
         ADVANCED_DEFAULTS.add(new PegDownExtension("AUTOLINKS", 16, true));
         ADVANCED_DEFAULTS.add(new PegDownExtension("DEFINITIONS", 64, true));
         ADVANCED_DEFAULTS.add(new PegDownExtension("FENCED_CODE_BLOCKS", 128, true));
