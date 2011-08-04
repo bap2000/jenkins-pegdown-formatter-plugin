@@ -56,6 +56,14 @@ public class PegDownFormatter extends MarkupFormatter {
         this.flags = ExtensionUtils.toFlags(extensions, advancedExtensions);
     }
 
+    public String getCodeMirrorMode() {
+        return extensions.get(0).isSelected() ? null: "htmlmixed";
+    }
+
+    public String getCodeMirrorConfig() {
+        return "mode:'text/html'";
+    }
+
     public List<PegDownExtension> getExtensions() {
         return extensions;
     }
