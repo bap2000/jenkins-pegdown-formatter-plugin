@@ -28,7 +28,6 @@
     <f:description>
         <j:out value='${%pegDown.description}'/>
     </f:description>
-    <f:section title="${%section}">
         <f:description>
             <j:out value='${%extensions.description}'/>
         </f:description>
@@ -49,5 +48,4 @@
                 </f:repeatable>
             </f:entry>
         </f:advanced>
-    </f:section>
 </j:jelly>
